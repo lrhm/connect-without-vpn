@@ -22,3 +22,4 @@ my interface name is enp6s0 (find out with `ifconfig`) and default gateway of th
 * crawl ip range of a country and add a argument for selecting a country instead of a local file
 * finding default interface
 * finding default gateway
+* adding a self learning system to route filtered ip's to tunnel and not filters ip's directly
