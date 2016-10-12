@@ -3,9 +3,11 @@ connect directly to a country(ip range) and use tunnel for outside of that count
 for example we want to use internet directly for iran. and vpn for outside of iran(probably filtered). works with python2 in linux
 
 ## Usage
-``` python2.7 director.py [--interface INTERFACE] [-i [I]]
+
+```
+python2.7 director.py [--interface INTERFACE] [-i [I]]
                    [-gw [GW]]
-                   ```
+```
 ## Arguments
 *  `-h, --help`            show this help message and exit
 *  `--version`             show program's version number and exit
@@ -23,3 +25,13 @@ my interface name is enp6s0 (find out with `ifconfig`) and default gateway of th
 * finding default interface
 * finding default gateway
 * adding a self learning system to route filtered ip's to tunnel and not filters ip's directly
+
+
+## Self learning
+`sniffer.py` is a basic implementation of self learning patterns. which takes a different approach rather than `director.py` which is:
+* route every packet in default censored interface and sniff all packets, if there is a censored ip then route that in tunnel interface.
+* route dns through tunnel which solve dns censored ssl websites.
+
+### self learning pattern's :
+* `403 Forbidden` in socket's data.
+* no answer. but the site might be down. should find a better approach
