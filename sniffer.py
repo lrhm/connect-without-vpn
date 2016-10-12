@@ -2,6 +2,7 @@ import fcntl
 import os
 import socket
 import argparse
+import sys
 from struct import *
 
 
@@ -10,14 +11,14 @@ def init_parser():
         description="Self learning from sniffing packets to know its censored or not. \
         if its censored then it will be routed through tunnel")
     parser.add_argument('--version', action='version', version='%(prog)s 1.0')
-    parser.add_argument("--interface", nargs=1, dest="interface",
+    parser.add_argument("--interface", nargs='?', dest="interface",
                         help="your default interface which accesses censored internet",
                         default="enp6s0")
     parser.add_argument('--tun', help="your tunnel interface"
                         , nargs='?', dest="tunnel")
     parser.add_argument("-udp", help="if should sniff and route udp packets then pass True",
                         nargs="?", dest="use_udp", default=False, const=True, type=bool)
-    parser.add_argument("-d", help="for debug purposes", default=False, const=True, type=bool, dest="debug")
+    parser.add_argument("-d", nargs="?", help="for debug purposes", default=False, const=True, type=bool, dest="debug")
     return parser.parse_args(sys.argv[1:])
 
 
@@ -66,7 +67,7 @@ def main(use_udp, tun, interface, debug):
         print 'Socket could not be created. Error Code : ' + str(msg[0]) + ' Message ' + msg[1]
         sys.exit()
 
-    local_ip = get_ip_address()
+    local_ip = get_ip_address(interface)
 
     # receive a packet
     while True:

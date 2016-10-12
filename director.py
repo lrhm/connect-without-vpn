@@ -8,7 +8,7 @@ import os, time
 def init_parser():
     parser = argparse.ArgumentParser(description="Routing from ip list directly, not from tunnel")
     parser.add_argument('--version', action='version', version='%(prog)s 1.0')
-    parser.add_argument("--interface", nargs=1, dest="interface",
+    parser.add_argument("--interface", nargs='?', dest="interface",
                         help="your desired interface that ip/masks should route in",
                         default="enp6s0")
     parser.add_argument('-i', help="input file, each line should consist of ip/netmask , lines with # will be ignored" \
